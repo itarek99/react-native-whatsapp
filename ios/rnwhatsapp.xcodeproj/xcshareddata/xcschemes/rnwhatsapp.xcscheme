@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "rnwhatsapp.app"
-               BlueprintName = "rnwhatsapp"
-               ReferencedContainer = "container:rnwhatsapp.xcodeproj">
+               BuildableName = "RNWhatsApp.app"
+               BlueprintName = "RNWhatsApp"
+               ReferencedContainer = "container:RNWhatsApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "rnwhatsappTests.xctest"
-               BlueprintName = "rnwhatsappTests"
-               ReferencedContainer = "container:rnwhatsapp.xcodeproj">
+               BuildableName = "RNWhatsAppTests.xctest"
+               BlueprintName = "RNWhatsAppTests"
+               ReferencedContainer = "container:RNWhatsApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rnwhatsapp.app"
-            BlueprintName = "rnwhatsapp"
-            ReferencedContainer = "container:rnwhatsapp.xcodeproj">
+            BuildableName = "RNWhatsApp.app"
+            BlueprintName = "RNWhatsApp"
+            ReferencedContainer = "container:RNWhatsApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rnwhatsapp.app"
-            BlueprintName = "rnwhatsapp"
-            ReferencedContainer = "container:rnwhatsapp.xcodeproj">
+            BuildableName = "RNWhatsApp.app"
+            BlueprintName = "RNWhatsApp"
+            ReferencedContainer = "container:RNWhatsApp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
