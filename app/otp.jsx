@@ -1,6 +1,16 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Linking,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import MaskInput from "react-native-mask-input";
 
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -17,12 +27,25 @@ const Page = () => {
     Linking.openURL("https://www.google.com");
   };
 
-  const sentOtp = async () => {};
+  const sentOtp = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      router.push(`verify/${phone}`, phone);
+    }, 200);
+  };
   const trySignIn = async () => {};
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }}>
       <View style={styles.container}>
+        {loading && (
+          <View style={styles.loading}>
+            <ActivityIndicator size="large" color={Colors.primary} />
+            <Text style={{ fontSize: 18, padding: 10 }}>Sending Code...</Text>
+          </View>
+        )}
+
         <Text style={styles.description}>
           React Native Whatsapp need to verify your account. Career charge may apply.
         </Text>
@@ -33,6 +56,17 @@ const Page = () => {
             <Ionicons name="chevron-forward" size={20} color={Colors.gray} />
           </View>
           <View style={styles.separator} />
+          <MaskInput
+            keyboardType="phone-pad"
+            style={styles.input}
+            autoFocus
+            placeholder="+8801XXXXXXXXX"
+            value={phone}
+            onChangeText={(masked, unmasked) => {
+              setPhone(masked);
+            }}
+            mask={["+", "8", "8", "0", /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+          />
         </View>
         <Text style={styles.description}>
           Read our{" "}
@@ -48,9 +82,9 @@ const Page = () => {
         <View style={{ flex: 1 }} />
         <TouchableOpacity
           disabled={phone === ""}
-          style={[styles.button, phone !== "" ? styles.buttonEnabled : null, { marginBottom: bottom }]}
+          style={[styles.button, phone.length === 14 ? styles.buttonEnabled : null, { marginBottom: bottom }]}
           onPress={sentOtp}>
-          <Text style={[styles.buttonText, phone !== "" ? styles.buttonEnabled : null]}>Next</Text>
+          <Text style={[styles.buttonText, phone.length === 14 ? styles.buttonEnabled : null]}>Next</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -118,5 +152,20 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     fontSize: 22,
     fontWeight: "500",
+  },
+
+  input: {
+    width: "100%",
+    padding: 6,
+    marginTop: 10,
+    fontSize: 16,
+    backgroundColor: "#fff",
+  },
+  loading: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
 });
