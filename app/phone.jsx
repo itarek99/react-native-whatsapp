@@ -1,24 +1,14 @@
-import { useRouter } from "expo-router";
-import React, { useState } from "react";
-import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Linking,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import MaskInput from "react-native-mask-input";
-
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import * as SecureStore from "expo-secure-store";
+import React, { useState } from "react";
+import { KeyboardAvoidingView, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import MaskInput from "react-native-mask-input";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Colors from "../constants/Colors";
 
 const Page = () => {
-  const [loading, setLoading] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const router = useRouter();
   const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
   const { bottom } = useSafeAreaInsets();
@@ -27,25 +17,14 @@ const Page = () => {
     Linking.openURL("https://www.google.com");
   };
 
-  const sentOtp = async () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      router.push(`verify/${phone}`, phone);
-    }, 200);
+  const setUserNumber = async () => {
+    await SecureStore.setItemAsync("phone", phoneNumber);
+    router.push("/(tabs)/chats");
   };
-  const trySignIn = async () => {};
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }}>
+    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={keyboardVerticalOffset} style={{ flex: 1 }}>
       <View style={styles.container}>
-        {loading && (
-          <View style={styles.loading}>
-            <ActivityIndicator size="large" color={Colors.primary} />
-            <Text style={{ fontSize: 18, padding: 10 }}>Sending Code...</Text>
-          </View>
-        )}
-
         <Text style={styles.description}>
           React Native Whatsapp need to verify your account. Career charge may apply.
         </Text>
@@ -61,9 +40,9 @@ const Page = () => {
             style={styles.input}
             autoFocus
             placeholder="+8801XXXXXXXXX"
-            value={phone}
+            value={phoneNumber}
             onChangeText={(masked, unmasked) => {
-              setPhone(masked);
+              setPhoneNumber(masked);
             }}
             mask={["+", "8", "8", "0", /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
           />
@@ -81,10 +60,10 @@ const Page = () => {
         </Text>
         <View style={{ flex: 1 }} />
         <TouchableOpacity
-          disabled={phone === ""}
-          style={[styles.button, phone.length === 14 ? styles.buttonEnabled : null, { marginBottom: bottom }]}
-          onPress={sentOtp}>
-          <Text style={[styles.buttonText, phone.length === 14 ? styles.buttonEnabled : null]}>Next</Text>
+          disabled={phoneNumber === ""}
+          style={[styles.button, phoneNumber.length === 14 ? styles.buttonEnabled : null, { marginBottom: bottom }]}
+          onPress={setUserNumber}>
+          <Text style={[styles.buttonText, phoneNumber.length === 14 ? styles.buttonEnabled : null]}>Next</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

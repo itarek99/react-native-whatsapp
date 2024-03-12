@@ -32,7 +32,7 @@ const Page = () => {
         </Text>
         .
       </Text>
-      <Link href={"/otp"} replace asChild>
+      <Link href={"/phone"} replace asChild>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Agree & Continue</Text>
         </TouchableOpacity>
