@@ -28,7 +28,7 @@ const InitialLayout = () => {
   const getPhone = async () => {
     const token = await SecureStore.getItemAsync("phone");
     if (token) {
-      router.replace("/(tabs)/chats");
+      router.replace("/(tabs)/calls");
     }
   };
 

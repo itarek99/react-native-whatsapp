@@ -2,9 +2,9 @@ import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import React from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import settings from "../../../assets/data/settings";
 import SettingGroup from "../../../components/SettingGroup";
 import Colors from "../../../constants/Colors";
-import settings from "../../../data/settings";
 
 const Settings = () => {
   const router = useRouter();

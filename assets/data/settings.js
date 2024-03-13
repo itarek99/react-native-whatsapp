@@ -1,4 +1,4 @@
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
 const settings = {
   devices: [
@@ -15,7 +15,7 @@ const settings = {
     {
       name: "Linked Devices",
       icon: "laptop-outline",
-      backgroundColor: Colors.green,
+      backgroundColor: "#00AD9F",
     },
   ],
 
