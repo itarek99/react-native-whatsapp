@@ -13,6 +13,7 @@ const Layout = () => {
           headerStyle: {
             backgroundColor: Colors.background,
           },
+
           headerShadowVisible: false,
           tabBarStyle: {
             backgroundColor: Colors.background,
