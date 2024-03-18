@@ -2,27 +2,25 @@ import { Ionicons } from "@expo/vector-icons";
 import { format } from "date-fns";
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import Animated, { FadeInUp, FadeOutUp } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import Colors from "../constants/Colors";
 import { defaultStyles } from "../constants/Styles";
 
-const CallsEntry = ({ data, index }) => {
+const CallsEntry = ({ data, animatedStyle }) => {
   return (
-    <Animated.View entering={FadeInUp.delay(index * 10)} exiting={FadeOutUp}>
-      <View style={defaultStyles.item}>
-        <Image style={styles.avatar} source={{ uri: data.img }} />
-        <View style={styles.detailContainer}>
-          <Text style={data.missed ? styles.missed : styles.picked}>{data.name}</Text>
+    <Animated.View style={[defaultStyles.item, animatedStyle]}>
+      <Image style={styles.avatar} source={{ uri: data.img }} />
+      <View style={styles.detailContainer}>
+        <Text style={data.missed ? styles.missed : styles.picked}>{data.name}</Text>
 
-          <View style={styles.callType}>
-            <Ionicons name={data.video ? "videocam" : "call"} size={16} color={Colors.gray} />
-            <Text style={styles.callTypeText}>{data.incoming ? "Incoming" : "Outgoing"}</Text>
-          </View>
+        <View style={styles.callType}>
+          <Ionicons name={data.video ? "videocam" : "call"} size={16} color={Colors.gray} />
+          <Text style={styles.callTypeText}>{data.incoming ? "Incoming" : "Outgoing"}</Text>
         </View>
-        <View style={styles.callInfo}>
-          <Text style={styles.callInfoDate}>{format(data.date, "MM/dd/yy")}</Text>
-          <Ionicons name="information-circle-outline" size={24} color={Colors.primary} />
-        </View>
+      </View>
+      <View style={styles.callInfo}>
+        <Text style={styles.callInfoDate}>{format(data.date, "MM/dd/yy")}</Text>
+        <Ionicons name="information-circle-outline" size={24} color={Colors.primary} />
       </View>
     </Animated.View>
   );

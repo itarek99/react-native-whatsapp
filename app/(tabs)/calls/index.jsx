@@ -1,10 +1,19 @@
 import calls from "@/assets/data/calls.json";
+import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import Animated, { CurvedTransition } from "react-native-reanimated";
+import Animated, {
+  CurvedTransition,
+  FadeInUp,
+  FadeOutUp,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import CallsEntry from "../../../components/CallsEntry";
 import SegmentedControl from "../../../components/SegmentedControl";
+import SwipeableRow from "../../../components/SwipeableRow";
 import Colors from "../../../constants/Colors";
 import { defaultStyles } from "../../../constants/Styles";
 
@@ -24,9 +33,26 @@ const Calls = () => {
     }
   };
 
+  const editing = useSharedValue(-30);
+
   const handleEdit = () => {
-    setIsEditing((prev) => !prev);
+    let editingNew = !isEditing;
+    editing.value = editingNew ? 0 : -30;
+    setIsEditing(editingNew);
   };
+
+  const handleDelete = (id) => {
+    setItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+  const animatedRowStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: withTiming(editing.value) }],
+    };
+  }, [editing]);
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -54,7 +80,21 @@ const Calls = () => {
             itemLayoutAnimation={transitions}
             ItemSeparatorComponent={() => <View style={defaultStyles.separator} />}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item, index }) => <CallsEntry data={item} index={index} />}
+            renderItem={({ item, index }) => (
+              <SwipeableRow onDelete={() => handleDelete(item.id)}>
+                <Animated.View
+                  style={[{ flexDirection: "row", alignItems: "center" }]}
+                  entering={FadeInUp.delay(index * 10)}
+                  exiting={FadeOutUp}>
+                  <AnimatedPressable
+                    onPress={() => handleDelete(item.id)}
+                    style={[animatedRowStyle, { paddingLeft: 8 }]}>
+                    <Ionicons name="remove-circle" size={24} color={Colors.red} />
+                  </AnimatedPressable>
+                  <CallsEntry animatedStyle={animatedRowStyle} data={item} index={index} />
+                </Animated.View>
+              </SwipeableRow>
+            )}
           />
         </Animated.View>
       </ScrollView>
