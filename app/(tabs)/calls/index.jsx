@@ -57,6 +57,7 @@ const Calls = () => {
     <View style={styles.container}>
       <Stack.Screen
         options={{
+          headerTitleAlign: "center",
           headerTitle: () => (
             <SegmentedControl
               options={["All", "Missed"]}
