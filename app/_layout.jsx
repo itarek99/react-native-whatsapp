@@ -1,3 +1,4 @@
+import Colors from "@/constants/Colors";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Stack, useRouter } from "expo-router";
@@ -41,6 +42,16 @@ const InitialLayout = () => {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="phone" options={{ headerTitle: "Enter Your Mobile Number", headerBackVisible: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(modals)/contacts"
+        options={{
+          presentation: "modal",
+          headerTitle: "New Chat",
+          headerStyle: {
+            backgroundColor: Colors.background,
+          },
+        }}
+      />
     </Stack>
   );
 };

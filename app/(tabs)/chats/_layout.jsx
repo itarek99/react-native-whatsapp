@@ -31,7 +31,7 @@ const Layout = () => {
               <TouchableOpacity>
                 <Ionicons name="camera-outline" color={Colors.primary} size={30} />
               </TouchableOpacity>
-              <Link href="/(modals)/new-chat" asChild>
+              <Link href="/(modals)/contacts" asChild>
                 <TouchableOpacity>
                   <Ionicons name="add-circle" color={Colors.primary} size={30} />
                 </TouchableOpacity>
