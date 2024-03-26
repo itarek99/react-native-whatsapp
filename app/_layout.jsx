@@ -1,10 +1,12 @@
 import Colors from "@/constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import { Stack, useRouter } from "expo-router";
+import { Link, Stack, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -50,6 +52,22 @@ const InitialLayout = () => {
           headerStyle: {
             backgroundColor: Colors.background,
           },
+          headerSearchBarOptions: {
+            placeholder: "Search By Name Or Number",
+            hideWhenScrolling: false,
+          },
+          headerRight: () => (
+            <Link href={`/(tabs)/chats`} asChild>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: Colors.lightGray,
+                  borderRadius: 20,
+                  padding: 4,
+                }}>
+                <Ionicons name="close" color={Colors.gray} size={24} />
+              </TouchableOpacity>
+            </Link>
+          ),
         }}
       />
     </Stack>

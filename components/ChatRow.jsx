@@ -8,7 +8,7 @@ import AppleStyleSwipeableRow from "./AppleStyleSwipeableRow";
 const ChatRow = ({ id, from, date, img, msg, read, unreadCount }) => {
   return (
     <AppleStyleSwipeableRow>
-      <Link href={"/(tabs)/chats"} asChild>
+      <Link href={`/(tabs)/chats/${id}`} asChild>
         <TouchableHighlight activeOpacity={0.6} underlayColor={Colors.lightGray}>
           <View style={styles.chatItem}>
             <Image source={{ uri: img }} style={{ width: 50, height: 50, borderRadius: 25 }} />
