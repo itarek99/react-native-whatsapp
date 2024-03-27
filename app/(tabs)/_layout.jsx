@@ -26,6 +26,7 @@ const Layout = () => {
         <Tabs.Screen
           name="updates"
           options={{
+            headerShown: false,
             title: "Updates",
             tabBarIcon: ({ size, color }) => <MaterialIcons name="update" size={size} color={color} />,
           }}
