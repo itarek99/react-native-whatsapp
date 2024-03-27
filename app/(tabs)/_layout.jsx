@@ -41,6 +41,7 @@ const Layout = () => {
         <Tabs.Screen
           name="communities"
           options={{
+            headerShown: false,
             title: "Communities",
             tabBarIcon: ({ size, color }) => <MaterialIcons name="people" size={size + 1} color={color} />,
           }}
